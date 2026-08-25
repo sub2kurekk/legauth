@@ -1,0 +1,56 @@
+<%- include('partials/header') %>
+
+<h1>Servers</h1>
+
+<h2>Add a server</h2>
+<div class="card">
+  <form method="POST" action="/servers">
+    <label for="name">Server name</label>
+    <input type="text" id="name" name="name" required maxlength="64">
+    <label for="address">Address (host:port)</label>
+    <input type="text" id="address" name="address" required maxlength="128" placeholder="play.example.com:25565">
+    <button type="submit" class="btn btn-primary">Add Server</button>
+  </form>
+</div>
+
+<h2>Your servers</h2>
+<div class="card">
+  <% if (myServers.length === 0) { %>
+    <p class="muted small">You haven't registered any servers yet.</p>
+  <% } else { %>
+    <table class="list">
+      <thead><tr><th>Name</th><th>Address</th><th></th></tr></thead>
+      <tbody>
+        <% myServers.forEach(function(s) { %>
+          <tr>
+            <td><%= s.name %></td>
+            <td class="muted"><%= s.address %></td>
+            <td>
+              <form method="POST" action="/servers/<%= s.id %>/delete">
+                <button type="submit" class="btn btn-danger" style="padding:4px 10px;font-size:11px">Remove</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<h2>All registered servers</h2>
+<div class="card">
+  <% if (allServers.length === 0) { %>
+    <p class="muted small">No servers have been registered yet.</p>
+  <% } else { %>
+    <table class="list">
+      <thead><tr><th>Name</th><th>Address</th></tr></thead>
+      <tbody>
+        <% allServers.forEach(function(s) { %>
+          <tr><td><%= s.name %></td><td class="muted"><%= s.address %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

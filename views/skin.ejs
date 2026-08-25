@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<h1>Skin &amp; Cape &mdash; <%= profile.name %></h1>
+
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<% if (notice) { %><div class="notice"><%= notice %></div><% } %>
+
+<div class="split">
+  <div class="card">
+    <label>Current skin</label>
+    <img class="skin-preview" src="<%= profile.skinHash ? (publicUrl + '/textures/' + profile.skinHash) : '/public/img/default-avatar.svg' %>" alt="">
+    <p class="small muted">Model: <%= profile.skinModel %></p>
+    <% if (profile.skinHash) { %>
+      <form method="POST" action="/account/skin/<%= profile.uuid %>/clear/skin">
+        <button type="submit" class="btn btn-secondary">Reset to default</button>
+      </form>
+    <% } %>
+  </div>
+  <div class="card">
+    <label>Current cape</label>
+    <img class="skin-preview" src="<%= profile.capeHash ? (publicUrl + '/textures/' + profile.capeHash) : '/public/img/default-avatar.svg' %>" alt="">
+    <% if (profile.capeHash) { %>
+      <form method="POST" action="/account/skin/<%= profile.uuid %>/clear/cape">
+        <button type="submit" class="btn btn-secondary">Remove cape</button>
+      </form>
+    <% } %>
+  </div>
+</div>
+
+<h2>Upload new texture</h2>
+<div class="card">
+  <form method="POST" action="/account/skin/<%= profile.uuid %>" enctype="multipart/form-data">
+    <label for="skin">Skin (PNG, 64x64 or 64x32)</label>
+    <input type="file" id="skin" name="skin" accept="image/png">
+
+    <label for="model">Skin model</label>
+    <select id="model" name="model">
+      <option value="default" <%= profile.skinModel !== 'slim' ? 'selected' : '' %>>Default (wide arms)</option>
+      <option value="slim" <%= profile.skinModel === 'slim' ? 'selected' : '' %>>Slim (thin arms)</option>
+    </select>
+
+    <label for="cape">Cape (PNG, 64x32 or 22x17)</label>
+    <input type="file" id="cape" name="cape" accept="image/png">
+
+    <button type="submit" class="btn btn-primary">Upload</button>
+    <a class="btn btn-secondary" href="/account">Back to account</a>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

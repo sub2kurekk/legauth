@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+
+<h1>Admin Panel</h1>
+<p class="small muted">Every account on this server, all managed from this single admin login.</p>
+
+<% if (error) { %><div class="error"><%= error %></div><% } %>
+<% if (notice) { %><div class="notice"><%= notice %></div><% } %>
+
+<h2>Create a new account</h2>
+<div class="card">
+  <form method="POST" action="/admin/users/create">
+    <div class="split">
+      <div>
+        <label for="email">E-mail address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="text" id="password" name="password" required minlength="8" placeholder="min. 8 characters">
+      </div>
+    </div>
+    <div class="split">
+      <div>
+        <label for="profileName">Initial profile name (optional)</label>
+        <input type="text" id="profileName" name="profileName" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}">
+      </div>
+      <div style="display:flex;align-items:center;padding-top:24px">
+        <label style="font-weight:normal;display:flex;align-items:center;gap:6px;margin:0">
+          <input type="checkbox" name="isAdmin" style="width:auto;margin:0"> Grant admin access
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Account</button>
+  </form>
+</div>
+
+<h2>All accounts (<%= users.length %>)</h2>
+<div class="card">
+  <table class="list">
+    <thead>
+      <tr>
+        <th>E-mail</th>
+        <th>Profiles</th>
+        <th>Role</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(function(u) { %>
+        <tr>
+          <td><%= u.email %></td>
+          <td class="muted small"><%= u.profiles.map(function(p){ return p.name }).join(', ') || '—' %></td>
+          <td><span class="badge <%= u.isAdmin ? 'admin' : '' %>"><%= u.isAdmin ? 'Admin' : 'User' %></span></td>
+          <td class="muted small"><%= new Date(u.createdAt).toLocaleDateString() %></td>
+          <td>
+            <form method="POST" action="/admin/users/<%= u.id %>/reset-password" style="display:inline">
+              <button type="submit" class="btn btn-secondary" style="padding:4px 8px;font-size:11px">Reset password</button>
+            </form>
+            <form method="POST" action="/admin/users/<%= u.id %>/toggle-admin" style="display:inline">
+              <button type="submit" class="btn btn-secondary" style="padding:4px 8px;font-size:11px"><%= u.isAdmin ? 'Revoke admin' : 'Make admin' %></button>
+            </form>
+            <form method="POST" action="/admin/users/<%= u.id %>/delete" style="display:inline" onsubmit="return confirm('Delete this account and all its profiles? This cannot be undone.');">
+              <button type="submit" class="btn btn-danger" style="padding:4px 8px;font-size:11px">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

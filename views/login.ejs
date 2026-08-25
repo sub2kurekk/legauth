@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<div class="narrow">
+  <h1>Log in to your account</h1>
+  <div class="card">
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+    <% if (notice) { %><div class="notice"><%= notice %></div><% } %>
+    <form method="POST" action="/login">
+      <label for="email">E-mail address</label>
+      <input type="email" id="email" name="email" required autofocus>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit" class="btn btn-primary" style="width:100%">Log In</button>
+    </form>
+  </div>
+  <p class="small muted" style="text-align:center">
+    Don't have an account? <a href="/register">Register here</a>.
+  </p>
+</div>
+
+<%- include('partials/footer') %>

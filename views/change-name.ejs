@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+
+<div class="narrow">
+  <h1>Change name</h1>
+  <div class="card">
+    <p class="small muted">Current name: <strong><%= profile.name %></strong></p>
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+    <form method="POST" action="/account/change-name/<%= profile.uuid %>">
+      <label for="name">New profile name</label>
+      <input type="text" id="name" name="name" required minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" autofocus>
+      <button type="submit" class="btn btn-primary">Change Name</button>
+      <a class="btn btn-secondary" href="/account">Cancel</a>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

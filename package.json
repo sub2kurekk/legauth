@@ -1,0 +1,23 @@
+{
+  "name": "legauth",
+  "version": "1.0.0",
+  "description": "Legauth — a self-hosted authlib-injector / Yggdrasil compatible authentication, skin, and account server with an old-Mojang-style web UI and an admin panel.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^2.1.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "multer": "^2.0.0",
+    "pngjs": "^7.0.0"
+  }
+}

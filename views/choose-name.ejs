@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+<div class="narrow">
+  <h1>Create a game profile</h1>
+  <div class="card">
+    <p><strong>Get going</strong></p>
+    <p class="small muted">Before you can start playing, you first need to choose a name for your profile. This name will be shown to other players that you meet in the game.</p>
+
+    <h2 style="border:none;margin-top:20px">Choose a name</h2>
+    <p class="small muted">You might not be able to change your name often, so please choose wisely!</p>
+
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+
+    <form method="POST" action="/account/choose-name">
+      <label for="name">Profile name</label>
+      <input type="text" id="name" name="name" required minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" value="<%= typeof name !== 'undefined' ? name : '' %>" autofocus>
+      <button type="submit" class="btn btn-primary">Choose Name</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

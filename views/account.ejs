@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+
+<h1>My Account</h1>
+
+<div class="card">
+  <label>E-mail address</label>
+  <p style="margin:0 0 10px"><%= currentUser.email %></p>
+  <a href="/account/password">Change password &rsaquo;</a>
+</div>
+
+<h2>My Profiles</h2>
+
+<% if (profiles.length === 0) { %>
+  <div class="card">
+    <p>You don't have a game profile yet.</p>
+    <a class="btn btn-primary" href="/account/choose-name">Choose a name &rsaquo;</a>
+  </div>
+<% } else { %>
+  <div class="card">
+    <table class="list">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Profile Name</th>
+          <th>UUID</th>
+          <th>Since</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% profiles.forEach(function(p) { %>
+          <tr>
+            <td><img class="skin-preview" style="width:32px;height:32px" src="<%= p.skinHash ? (publicUrl + '/textures/' + p.skinHash) : '/public/img/default-avatar.svg' %>" alt=""></td>
+            <td><strong><%= p.name %></strong></td>
+            <td class="muted small"><%= dashUuid(p.uuid) %></td>
+            <td><%= new Date(p.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %></td>
+            <td>
+              <a href="/account/change-name/<%= p.uuid %>">Change name</a> &middot;
+              <a href="/account/skin/<%= p.uuid %>">Change skin</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<h2>Servers</h2>
+<div class="card">
+  <p class="small muted">Register your Minecraft server address here so other account holders on this site can find it.</p>
+  <a href="/servers">Manage servers &rsaquo;</a>
+</div>
+
+<h2>Using this account with a launcher</h2>
+<div class="card small">
+  <p>To connect a launcher such as <strong>Fjord Launcher</strong> (or any launcher supporting custom authlib-injector servers), use this authentication server URL:</p>
+  <p><code><%= publicUrl %>/api/yggdrasil/</code></p>
+  <p class="muted">Log in with your e-mail and password above (or your profile name, if the launcher only asks for a username).</p>
+</div>
+
+<%- include('partials/footer') %>

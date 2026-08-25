@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= siteName %></title>
+  <link rel="stylesheet" href="/public/css/mojang.css">
+  <link rel="icon" type="image/png" href="/public/img/favicon-32.png">
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/public/img/logo.png" srcset="/public/img/logo.png 1x, /public/img/logo@2x.png 2x" alt="<%= siteName %>">
+    </a>
+    <div class="topnav">
+      <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+        <span class="email"><%= currentUser.email %><% if (currentUser.isAdmin) { %><span class="admin-tag">ADMIN</span><% } %></span>
+        <a class="pill" href="/account">My Account</a>
+        <a class="pill" href="/servers">Servers</a>
+        <% if (currentUser.isAdmin) { %><a class="pill" href="/admin">Admin Panel</a><% } %>
+        <form method="POST" action="/logout" style="display:inline">
+          <button type="submit" class="pill" style="cursor:pointer">Log Out</button>
+        </form>
+      <% } else { %>
+        <a class="pill" href="/login">Log In</a>
+        <a class="pill" href="/register">Register</a>
+      <% } %>
+    </div>
+  </div>
+</div>
+<div class="wrap">

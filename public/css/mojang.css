@@ -1,0 +1,251 @@
+/* Recreates the look of the pre-Microsoft Mojang account website:
+   gray gradient top bar, boxy white cards, red links, green primary
+   buttons. Branding is generic/configurable rather than the real
+   Mojang wordmark or logo. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+
+a { color: #cc4a3c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+  background: linear-gradient(to bottom, #f2f2f2 0%, #d8d8d8 100%);
+  border-bottom: 1px solid #b5b5b5;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.topnav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topnav .pill {
+  background: #6d6d6d;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 12px;
+  border: 1px solid #5a5a5a;
+}
+
+.topnav a.pill:hover { background: #5a5a5a; text-decoration: none; }
+
+.topnav .email {
+  color: #333;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px 60px;
+}
+
+.narrow {
+  max-width: 420px;
+  margin: 40px auto;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: normal;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+h2 {
+  font-size: 16px;
+  color: #1a1a1a;
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 8px;
+  margin: 30px 0 14px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 12px;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+input[type=text], input[type=email], input[type=password], select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #c6c6c6;
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: inherit;
+  margin-bottom: 14px;
+  background: #fff;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+  outline: none;
+  border-color: #8fae3e;
+}
+
+input[type=file] { margin-bottom: 14px; }
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-primary {
+  background: #7cb342;
+  color: #fff;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
+}
+.btn-primary:hover { background: #6f9f39; text-decoration: none; }
+
+.btn-secondary {
+  background: #efefef;
+  color: #333;
+  border: 1px solid #ccc;
+}
+.btn-secondary:hover { background: #e2e2e2; text-decoration: none; }
+
+.btn-danger {
+  background: #c0392b;
+  color: #fff;
+}
+.btn-danger:hover { background: #a53125; }
+
+table.list {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+table.list th {
+  text-align: left;
+  color: #777;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-bottom: 1px solid #e2e2e2;
+  font-size: 12px;
+  text-transform: none;
+}
+table.list td {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+table.list tr:last-child td { border-bottom: none; }
+
+.badge {
+  display: inline-block;
+  background: #eef3e2;
+  color: #628a2e;
+  border: 1px solid #cfe0ac;
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: bold;
+}
+.badge.admin { background: #fdeeee; color: #a53125; border-color: #f0c9c4; }
+
+.notice {
+  background: #eef6e2;
+  border: 1px solid #cfe0ac;
+  color: #4a6b23;
+  padding: 10px 14px;
+  border-radius: 3px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.error {
+  background: #fdeeee;
+  border: 1px solid #f0c9c4;
+  color: #a53125;
+  padding: 10px 14px;
+  border-radius: 3px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.muted { color: #888; }
+.small { font-size: 12px; }
+
+.skin-preview {
+  width: 96px;
+  height: 96px;
+  image-rendering: pixelated;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
+
+.split {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.split > div { flex: 1; min-width: 260px; }
+
+footer {
+  text-align: center;
+  color: #999;
+  font-size: 11px;
+  padding: 30px 20px;
+}
+
+.admin-tag {
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-left: 6px;
+}
